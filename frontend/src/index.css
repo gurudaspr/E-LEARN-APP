@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.body {
+  background-image: url('https://img.freepik.com/free-photo/learning-education-ideas-insight-intelligence-study-concept_53876-120116.jpg?t=st=1713795014~exp=1713798614~hmac=6dffc5f1b8ca662e7d86ddb3085ecb83d109a48a8c67bca518142c35e73e3555&w=1800');
+}
