@@ -10,7 +10,7 @@ export default function Home() {
         </div>
 
         <div className='text-center'>
-         <Link to={'/courses'}> <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Get a course</button></Link>
+         <Link to={'/courses'}> <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Get a course</button></Link> 
         </div>
       </div>
     </div>
