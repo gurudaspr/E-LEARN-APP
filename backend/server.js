@@ -6,6 +6,7 @@ dotenv.config()
 const PORT = process.env.PORT || 7895
 import connectToMongoDB from "./db/connectToMongoDb.js";
 import authRoutes from './routes/auth.routes.js'
+import courseRoutes from './routes/course.routes.js'
 
 
 app.use(cors('*'))
@@ -14,7 +15,9 @@ app.use(express.json())
 
 
 app.use("/auth", authRoutes);
-// app.use("/product" )
+
+app.use("/course", courseRoutes);
+
 
 
 app.use('/',(req,res)=>{
