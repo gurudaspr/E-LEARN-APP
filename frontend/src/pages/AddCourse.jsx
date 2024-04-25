@@ -1,16 +1,14 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 export default function AddCourse() {
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset, setValue } = useForm();
   const { id } = useParams();
-  console.log("id:", id);
   const isEdit = Boolean(id);
-  console.log( 'is edit',isEdit);
 
   const loadData = async () => {
     if (!isEdit) return;
@@ -30,6 +28,8 @@ export default function AddCourse() {
 
   const onSubmit = async (data) => {
     try {
+      setLoading(true);
+
       const formData = new FormData();
 
       Object.keys(data).forEach((key) => {
@@ -41,19 +41,15 @@ export default function AddCourse() {
       if (fileInput && fileInput.files[0]) {
         formData.append("image", fileInput.files[0]);
       }
+
       let res;
       if (isEdit) {
-        res = await axios.put(
-          `http://localhost:5000/course/view-course/${id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              authorization: `Bearer Token ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        console.log(formData);
+        res = await axios.put(`http://localhost:5000/course/view-course/${id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            authorization: `Bearer Token ${localStorage.getItem("token")}`,
+          },
+        });
       } else {
         res = await axios.post(`http://localhost:5000/course/add-course`, formData, {
           headers: {
@@ -66,7 +62,9 @@ export default function AddCourse() {
       reset();
     } catch (error) {
       console.error(error);
-      toast.error("error");
+      toast.error("Error occurred");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,9 +80,7 @@ export default function AddCourse() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label className='label p-2'>
-              
-              <span className='text-base label-text'>Course Name</span>
-
+                <span className='text-base label-text'>Course Name</span>
               </label>
               <input
                 type='text'
@@ -112,8 +108,7 @@ export default function AddCourse() {
             </div>
             <div className='p-2'>
               <button className=' btn btn-block bg-blue-600 text-white btn-sm mt-2 border-none hover:bg-blue-500' disabled={loading}>
-              {loading ? <span className='loading loading-spinner'></span> : (isEdit ? "Update Course" : "Add Course")}
-
+                {loading ? <span className='loading loading-spinner'></span> : (isEdit ? "Update Course" : "Add Course")}
               </button>
             </div>
           </form>

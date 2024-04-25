@@ -14,7 +14,7 @@ export default function Login() {
             setLoading(true);    
             let res = await axios.post(`http://localhost:5000/auth/login`, data);
             console.log(res.data.token);
-            useAuthStore.getState().login(res.data.token, res.data.userRole);
+            useAuthStore.getState().login(res.data.token, res.data.userRole ,res.data.userId,);
             let success = res.data.message;
             toast.success(success);
             navigate("/");

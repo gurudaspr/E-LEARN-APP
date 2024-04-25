@@ -2,17 +2,18 @@ import { create } from 'zustand';
 
 const useAuthStore = create((set) => ({
   isAuth: !!localStorage.getItem('token'),
-  userRole: sessionStorage.getItem('userRole') || '', // Initialize userRole with stored value or empty string
+  userRole: sessionStorage.getItem('userRole') || '',
+  userId: sessionStorage.getItem('userId') || '', 
 
-  login: (token, userRole) => {
+  login: (token, userRole, userId) => {
     localStorage.setItem('token', token);
-    sessionStorage.setItem('userRole', userRole); // Store userRole in sessionStorage
-    set({ isAuth: true, userRole });
+    sessionStorage.setItem('userRole', userRole); 
+    set({ isAuth: true, userRole, userId });
   },
   logout: () => {
     localStorage.removeItem('token');
-    sessionStorage.removeItem('userRole'); // Remove userRole from sessionStorage on logout
-    set({ isAuth: false, userRole: '' });
+    sessionStorage.removeItem('userRole'); 
+    set({ isAuth: false, userRole: '', userId: '' });
   },
   checkAuth: () => set({ isAuth: !!localStorage.getItem('token') })
 }));

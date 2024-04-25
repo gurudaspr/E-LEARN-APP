@@ -28,7 +28,7 @@ export default function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/add-course" element={<AddCourse />} />
-            <Route path="/course/:id" element={<AddCourse />} />
+            <Route path="/edit-course/:id" element={<AddCourse />} />
             <Route path="/my-courses" element={<Mycourses />} />
            
           </>
