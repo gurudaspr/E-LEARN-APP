@@ -14,7 +14,12 @@ export default function AddCourse() {
     if (!isEdit) return;
 
     try {
-      let res = await axios.get(`http://localhost:5000/course/view-course/${id}`);
+      const token = localStorage.getItem("token");
+      let res = await axios.get(`http://localhost:5000/course/view-course/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       let formValue = res.data.data;
 
       Object.keys(formValue).forEach((key) => {
@@ -47,14 +52,14 @@ export default function AddCourse() {
         res = await axios.put(`http://localhost:5000/course/view-course/${id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            authorization: `Bearer Token ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
       } else {
         res = await axios.post(`http://localhost:5000/course/add-course`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            authorization: `Bearer Token ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
       }

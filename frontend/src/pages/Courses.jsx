@@ -16,13 +16,18 @@ export default function Courses() {
   useEffect(() => {
     setTimeout(() => {
       fetchData();
-    }, 500); // Set loading for 2 seconds
+    }, 500);
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/course/view-course/');
-      setCourses(response.data);
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://localhost:5000/course/view-course/', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    setCourses(response.data);
     } catch (error) {
       console.error('Error fetching courses:', error);
     } finally {
@@ -35,8 +40,13 @@ export default function Courses() {
   };
 
   const handleDelete = async (id) => {
+    const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/course/view-course/${id}`);
+      await axios.delete(`http://localhost:5000/course/view-course/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       fetchData();
       toast.success("Course deleted successfully");
     } catch (error) {
@@ -46,10 +56,15 @@ export default function Courses() {
   };
 
   const enrollCourse = async (courseId) => {
+    const token = localStorage.getItem('token');
     try {
       await axios.post('http://localhost:5000/enroll/enroll-course', {
         userId: userId,
         courseId: courseId
+      },{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
       toast.success("Enrolled successfully");
     } catch (error) {

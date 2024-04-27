@@ -18,8 +18,9 @@ export const enrollCourse = async (req, res) => {
 }
 
 export const viewEnrollCourse = async (req, res) => {
+  const { userId } = req.body;
     try {
-        const enrollments = await Enrollment.find({ userId: req.body.userId }).populate('courseId');
+        const enrollments = await Enrollment.find({ userId}).populate('courseId');
         res.status(200).json(enrollments);
       } catch (error) {
         console.error('Error fetching enrolled courses:', error);

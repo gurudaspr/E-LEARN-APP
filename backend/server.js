@@ -21,8 +21,8 @@ const __dirname = path.dirname(__filename);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/auth', authRoutes);
-app.use('/course', courseRoutes);
-app.use('/enroll', enrollRoutes);
+app.use('/course',verifyToken, courseRoutes);
+app.use('/enroll',verifyToken, enrollRoutes);
 
 
 

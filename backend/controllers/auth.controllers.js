@@ -12,8 +12,10 @@ export const login = async (req, res) => {
             return res.status(400).json({ error: "Invalid email or password" });
         }
         const payload = {
-            username: email,
-          }
+            userId: user._id,
+            email: user.email,
+            userRole: user.userRole
+        };
         const secret = process.env.JWT_SECRET
 
 
@@ -22,7 +24,7 @@ export const login = async (req, res) => {
         // console.log(token)
         res.status(200).json({
             userId: user._id,
-            Fullname: user.Fullname,
+            Fullname: user.fullName,
             email: user.email,
             token : token,
             userRole : user.userRole,

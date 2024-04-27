@@ -3,6 +3,6 @@ import { enrollCourse ,viewEnrollCourse} from "../controllers/enroll.controller.
 const router = express.Router();
 
 router.post('/enroll-course', enrollCourse);
-router.get('/view-enroll-course', viewEnrollCourse);
+router.post('/view-enroll-course', viewEnrollCourse);
 
 export default router;

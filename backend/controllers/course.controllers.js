@@ -23,10 +23,6 @@ export const addCourse = async (req, res) => {
         description,
         isNewtype,
       });
-      console.log(newCourse);
-
-      
-  
       const course = await Course.findOne({ title });
   
       if (course) {

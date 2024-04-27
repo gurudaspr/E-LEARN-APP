@@ -1,21 +1,44 @@
 import { create } from 'zustand';
+import {jwtDecode} from 'jwt-decode';
+
+const updateStoreWithToken = (set) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    const { userId, userRole } = decodedToken;
+    set({ isAuth: true, userId, userRole });
+  }
+};
 
 const useAuthStore = create((set) => ({
   isAuth: !!localStorage.getItem('token'),
-  userRole: sessionStorage.getItem('userRole') || '',
-  userId: sessionStorage.getItem('userId') || '', 
+  userRole: null,
+  userId: null,
 
-  login: (token, userRole, userId) => {
+  login: (token) => {
     localStorage.setItem('token', token);
-    sessionStorage.setItem('userRole', userRole); 
-    set({ isAuth: true, userRole, userId });
+    const decodedToken = jwtDecode(token);
+    const { userId, userRole } = decodedToken;
+    set({ isAuth: true, userId, userRole });
   },
+
   logout: () => {
     localStorage.removeItem('token');
-    sessionStorage.removeItem('userRole'); 
-    set({ isAuth: false, userRole: '', userId: '' });
+    set({ isAuth: false, userId: null, userRole: null });
   },
-  checkAuth: () => set({ isAuth: !!localStorage.getItem('token') })
+
+  checkAuth: () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const { userId, userRole } = decodedToken;
+      set({ isAuth: true, userId, userRole });
+    } else {
+      set({ isAuth: false, userId: null, userRole: null });
+    }
+  }
 }));
+
+updateStoreWithToken(useAuthStore.setState);
 
 export default useAuthStore;

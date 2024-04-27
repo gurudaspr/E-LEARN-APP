@@ -3,13 +3,13 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
-import Mycourses from "./pages/MyCourses";
 import Login from "./pages/Login";
 import useAuthStore from "./store/authStore";
 import { useEffect } from "react";
 import Signup from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
 import AddCourse from "./pages/AddCourse";
+import EnrolledCourse from "./pages/EnrolledCourse";
 
 export default function App() {
   const { isAuth, checkAuth } = useAuthStore();
@@ -29,7 +29,7 @@ export default function App() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/add-course" element={<AddCourse />} />
             <Route path="/edit-course/:id" element={<AddCourse />} />
-            <Route path="/my-courses" element={<Mycourses />} />
+            <Route path="/my-courses" element={<EnrolledCourse />} />
            
           </>
         ) : (
