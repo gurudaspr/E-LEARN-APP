@@ -6,9 +6,9 @@ import authRoutes from './routes/auth.routes.js';
 import courseRoutes from './routes/course.routes.js';
 import enrollRoutes from './routes/enroll.routes.js';
 import { verifyToken } from './utils/jwtVerify.js';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 dotenv.config();
 const PORT = process.env.PORT || 7895;
 const app = express();
