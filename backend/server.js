@@ -13,7 +13,10 @@ dotenv.config();
 const PORT = process.env.PORT || 7895;
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://192.168.1.3:5173',
+}));
+
 app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,9 +24,8 @@ const __dirname = path.dirname(__filename);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/auth', authRoutes);
-app.use('/course',verifyToken, courseRoutes);
+app.use('/course', courseRoutes);
 app.use('/enroll',verifyToken, enrollRoutes);
-
 
 
 app.use('/',(req,res)=>{

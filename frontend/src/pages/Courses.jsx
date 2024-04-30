@@ -3,15 +3,17 @@ import axios from 'axios';
 import { FaTrash } from 'react-icons/fa';
 import useAuthStore from '../store/authStore';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
+import Modal from '../components/Model';
 
 export default function Courses() {
-  const { userRole,userId } = useAuthStore();
+  const { userRole, userId } = useAuthStore();
   const isAdmin = userRole === 'admin';
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState([]);
+  const [deleteCourseId, setDeleteCourseId] = useState(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -23,11 +25,11 @@ export default function Courses() {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get('http://localhost:5000/course/view-course/', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    setCourses(response.data);
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setCourses(response.data);
     } catch (error) {
       console.error('Error fetching courses:', error);
     } finally {
@@ -40,9 +42,13 @@ export default function Courses() {
   };
 
   const handleDelete = async (id) => {
+    setDeleteCourseId(id); // Set the course id to be deleted
+  };
+
+  const confirmDelete = async () => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/course/view-course/${id}`,{
+      await axios.delete(`http://localhost:5000/course/view-course/${deleteCourseId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -51,8 +57,13 @@ export default function Courses() {
       toast.success("Course deleted successfully");
     } catch (error) {
       console.error(error);
-      toast.error("error");
+      toast.error("Failed to delete course");
+    } finally {
+      setDeleteCourseId(null);
     }
+  };
+  const cancelDelete = () => {
+    setDeleteCourseId(null); 
   };
 
   const enrollCourse = async (courseId) => {
@@ -61,15 +72,19 @@ export default function Courses() {
       await axios.post('http://localhost:5000/enroll/enroll-course', {
         userId: userId,
         courseId: courseId
-      },{
+      }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
       toast.success("Enrolled successfully");
-    } catch (error) {
-      console.error(error);
-      toast.error("Error occurred during enrollment");
+    } catch (error)  {
+      if (error.response && error.response.status === 400 && error.response.data.error === 'User already enrolled in this course') {
+        toast.error("User already enrolled in this course");
+      } else {
+        console.error(error);
+        toast.error("Failed to enroll");
+      }
     }
   };
 
@@ -79,7 +94,7 @@ export default function Courses() {
       <div className="container mx-auto">
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-20'>
           {loading ? (
-            Array.from({ length: 8 }).map((_, index) => (
+            Array.from({ length: 12 }).map((_, index) => (
               <div key={index} className="skeleton w-80 h-72 mx-auto bg-slate-300 shadow-xl"></div>
             ))
           ) : (
@@ -100,7 +115,7 @@ export default function Courses() {
                     </div>
                   ) : (
                     <div className="card-actions justify-end">
-                      <button onClick={() => enrollCourse(course._id)}className="btn bg-blue-600 text-white rounded border-none hover:bg-blue-500">Enroll</button>
+                      <button onClick={() => enrollCourse(course._id)} className="btn bg-blue-600 text-white rounded border-none hover:bg-blue-500">Enroll</button>
                     </div>
                   )}
                 </div>
@@ -109,6 +124,11 @@ export default function Courses() {
           )}
         </div>
       </div>
+      <Modal
+        isOpen={deleteCourseId !== null}
+        onProceed={confirmDelete}
+        onCancel={cancelDelete}
+      />
     </div>
   );
 }

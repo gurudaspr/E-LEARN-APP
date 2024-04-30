@@ -24,6 +24,7 @@ export default function EnrolledCourse() {
               });
             setEnrollments(response.data);
             console.log(response.data);
+
             setLoading(false);
         } catch (error) {
             console.error('Error fetching enrolled courses:', error);

@@ -5,7 +5,7 @@ export const enrollCourse = async (req, res) => {
         const { userId, courseId } = req.body;
         const existingEnrollment = await Enrollment.findOne({ userId, courseId });
         if (existingEnrollment) {
-          return res.status(400).json({ message: 'User already enrolled in this course' });
+          return res.status(400).json({ error : 'User already enrolled in this course' });
         }
         const enrollment = new Enrollment({ userId, courseId });
         await enrollment.save();

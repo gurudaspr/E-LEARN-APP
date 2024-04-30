@@ -12,11 +12,12 @@ export default function Signup() {
     const onSave = async (data) => {
       try {
         setLoading(true);
-        let res = await axios.post(`http://localhost:5000/auth/signup`, data);
+        await axios.post(`http://localhost:5000/auth/signup`, data);
         toast.success("signup success");
         navigate("/");
       } catch (error) {
         toast.error("something went wrong")
+		console.error(error);
         navigate("/signup");
       }finally{
         setLoading(false);
