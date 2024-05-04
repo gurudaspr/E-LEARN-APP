@@ -17,7 +17,7 @@ export default function EnrolledCourse() {
     const fetchEnrolledCourses = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post('http://localhost:5000/enroll/view-enroll-course', { userId },{
+            const response = await axios.post(`http://localhost:5000/enroll/view-enroll-course`, { userId },{
                 headers: {
                   Authorization: `Bearer ${token}`
                 }

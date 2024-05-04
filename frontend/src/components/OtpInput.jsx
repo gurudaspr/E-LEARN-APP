@@ -58,7 +58,7 @@ const OtpInput = ({ email, onVerify ,loading }) => {
 
                         <div>
                             <button type="submit" className='btn btn-block bg-blue-600 text-white btn-sm mt-2 border-none hover:bg-blue-500' disabled={loading}>
-                                {loading ? <span className='loading loading-spinner'></span> : "Verify Otp"}
+                                {loading ? <span className='loading loading-spinner'></span> : "Verify OTP"}
                             </button>
                         </div>
                     </form>

@@ -1,33 +1,16 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'; 
-import useAuthStore from '../store/authStore';
-import { toast } from 'react-toastify';
+import useLogin from '../hooks/useLogin';
 
 export default function Login() {
-    const { register, handleSubmit, reset } = useForm();
+	const { register, handleSubmit, loading, login } = useLogin();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false); 
-    const onSave = async (data) => {
-        try {
-            setLoading(true);    
-            let res = await axios.post(`http://localhost:5000/auth/login`, data);
-            console.log(res.data.token);
-            useAuthStore.getState().login(res.data.token, res.data.userRole ,res.data.userId,);
-            let success = res.data.message;
-            toast.success(success);
-            navigate("/");
-        } catch (error) {
-            console.error(error);
-            toast.error("Failed authentication");
-            navigate("/login");
-            reset();
-        }
-        finally {
-			setLoading(false);
-		}
+
+    const onSave = (data) => {
+        login(data, navigate);
     };
+
 
     return (
         <div className='flex justify-center items-center  h-screen bg-slate-200 w-full '>
@@ -62,9 +45,16 @@ export default function Login() {
 							{...register("password")}
 						/>
 					</div>
+					<div className=' flex justify-between'>
+					
 					<Link to='/signup' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
 						{"Don't"} have an account?
 					</Link>
+					<Link to='/reset-password' className='text-sm  hover:underline hover:text-red-600 mt-2 inline-block'>
+						 Reset Password
+					</Link>
+
+					</div>
 
 					<div>
 						<button className='btn btn-block bg-blue-600 text-white  btn-sm mt-2 border-none hover:bg-blue-500' disabled={loading}>

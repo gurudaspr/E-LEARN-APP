@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import { ToastContainer } from "react-toastify";
 import AddCourse from "./pages/AddCourse";
 import EnrolledCourse from "./pages/EnrolledCourse";
+import Resetpassword from "./pages/Resetpassword";
 
 export default function App() {
   const { isAuth, checkAuth } = useAuthStore();
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="/courses" element={<Courses/>} />
             <Route path="/my-courses" element={<Navigate replace to="/login" />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/reset-password" element={<Resetpassword />} />
             {/* <Route path="/add-course" element={<AddCourse />} /> */}
             
           </>

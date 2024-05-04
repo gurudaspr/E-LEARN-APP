@@ -22,7 +22,8 @@ const useSignup = () => {
           return;
         }
         setUserData(data)
-        // Check if email already exists
+        // Check if email exists
+
         const exists = await checkEmailExists(data.email);
         if (exists) {
           setEmailExists(true);
@@ -31,6 +32,7 @@ const useSignup = () => {
           return;
         }
         // If email doesn't exist, proceed with sending OTP
+        
         await sendOtp(data.email);
       } catch (error) {
         handleError(error);
@@ -45,7 +47,7 @@ const useSignup = () => {
       } catch (error) {
         console.error(error);
         return false; // Return false in case of an error
-      }
+      }   
     };
 
  const sendOtp = async (email) => {

@@ -69,7 +69,7 @@ export default function Courses() {
   const enrollCourse = async (courseId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:5000/enroll/enroll-course', {
+      await axios.post(`http://localhost:5000/enroll/enroll-course`, {
         userId: userId,
         courseId: courseId
       }, {
@@ -99,7 +99,7 @@ export default function Courses() {
             ))
           ) : (
             courses.map(course => (
-              <div key={course.id} className="card card-compact mx-auto bg-base-100 shadow-xl w-80 h-72">
+              <div key={course._id} className="card card-compact mx-auto bg-base-100 shadow-xl w-80 h-72">
                 <figure><img src={course.imageUrl} alt={course.title} /></figure>
                 <div className="card-body">
                   <h2 className="card-title">{course.title}
