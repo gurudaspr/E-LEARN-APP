@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-const OtpInput = ({ email, onVerify ,loading }) => {
+const OtpInput = ({ email, onVerify, loading }) => {
     const inputRefs = [
         useRef(null),
         useRef(null),
@@ -11,7 +11,7 @@ const OtpInput = ({ email, onVerify ,loading }) => {
     const onSubmit = (e) => {
         e.preventDefault(); // Prevent default form submission behavior
         const otp = inputRefs.map(ref => ref.current.value).join(''); // Concatenate values of all OTP input fields
-        onVerify( otp); // Pass email and OTP to the onVerify function
+        onVerify(otp); // Pass email and OTP to the onVerify function
     };
 
     const handleOnChange = (index, e) => {
@@ -38,8 +38,8 @@ const OtpInput = ({ email, onVerify ,loading }) => {
         <div className='flex justify-center items-center bg-slate-200'>
             <div className='rounded-lg bg-slate-300 w-12 flex flex-col items-center justify-center min-w-80 md:min-w-96 mx-auto'>
                 <div className='w-full p-6 '>
-                    <h1 className=' text-md font-semibold text-center py-3'>
-                        Enter OTP for {email}
+                    <h1 className='text-md font-semibold text-center py-3'>
+                        {email ? `Enter OTP for ${email}` : 'Enter OTP'}
                     </h1>
                     <form onSubmit={onSubmit}> {/* Manually handle form submission */}
                         <div className="flex justify-center items-center">

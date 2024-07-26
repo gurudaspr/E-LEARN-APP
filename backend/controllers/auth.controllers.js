@@ -174,9 +174,6 @@ export const sendResetPasswordOtp = async (req, res) => {
             subject: 'OTP for account verification',
             text: `Your OTP is: ${otp}`
         });
-        // console.log(otp);
-        // console.log('OTP sent successfully');
-
         res.status(200).json({ message: 'OTP sent successfully' });
     }
     catch (error) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 export default function AddCourse() {
@@ -9,6 +9,7 @@ export default function AddCourse() {
   const { register, handleSubmit, reset, setValue } = useForm();
   const { id } = useParams();
   const isEdit = Boolean(id);
+  const navigate = useNavigate();
 
   const loadData = async () => {
     if (!isEdit) return;
@@ -49,7 +50,7 @@ export default function AddCourse() {
 
       let res;
       if (isEdit) {
-        res = await axios.put(`http://localhost:5000/course/view-course/${id}`, formData, {
+        res = await axios.put(`http://localhost:5000/course/edit/${id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -64,6 +65,7 @@ export default function AddCourse() {
         });
       }
       toast.success(res.data.message || "Course added successfully");
+      navigate(`/courses`);
       reset();
     } catch (error) {
       console.error(error);

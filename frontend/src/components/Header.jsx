@@ -23,25 +23,24 @@ const Header = () => {
 
     const handleLogout = () => {
         logout();
-        // After logging out, navigate to the home page
         navigate("/");
     };
 
     return (
         <div className='shadow-md w-full sticky  top-0  left-0 z-10'>
             <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
-                {/* logo section */}
+               
                 <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
                     <FaBookOpen className='w-7 h-7 text-blue-600' />
                     <span>E-Learn</span>
                 </div>
-                {/* Menu icon */}
+                
                 <div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
                     {
                         open ? <FaX /> : <FaBarsStaggered />
                     }
                 </div>
-                {/* link items */}
+             
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-12' : 'top-[-490px]'}`}>
                     {
                         Links.map((link) => (
@@ -51,7 +50,7 @@ const Header = () => {
                         ))
                     }
 
-                    {/* is admin logged in  */}
+                  
                     {isAdmin ? (
                         <li className='md:ml-8 md:my-0 my-7 font-semibold'>
                             <Link to="/add-course" className='text-gray-800 hover:text-blue-400 duration-500 flex items-center'>
@@ -65,8 +64,6 @@ const Header = () => {
                         </li>
                     )}
 
-
-                    {/* Conditional rendering of the button based on authentication state */}
                     {isAuth ? (
                         <button onClick={handleLogout} className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>LOGOUT</button>
                     ) : (

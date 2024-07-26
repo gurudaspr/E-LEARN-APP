@@ -51,7 +51,7 @@ export default function Resetpassword() {
 							</button>
 						</div>
 					</form>
-					<OtpInput email={"data"}  onVerify={onVerifyOtp} />
+					<OtpInput  onVerify={onVerifyOtp} />
 				</div>):(
 					<ResetPswd email={email} />
 				)}

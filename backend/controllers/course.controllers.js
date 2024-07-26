@@ -1,7 +1,5 @@
 import Course from "../model/course.model.js";
-import fs from 'fs';
-import path from 'path';
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+import cloudinary from "../utils/cloudinary.js";
 
 
 export const viewCourse = async (req, res) => {
@@ -16,9 +14,19 @@ export const viewCourse = async (req, res) => {
 
 export const addCourse = async (req, res) => {
   try {
+    if (!req.file) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No file uploaded" });
+    }
     const { title, description, isNewtype } = req.body;
 
-    const imageUrl = 'http://localhost:5000/' + req.file.destination + req.file.filename;
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "course",
+      tags: "course",
+      resource_type: "auto"
+    });
+    const imageUrl = result.secure_url;
     const newCourse = new Course({
       title,
       imageUrl,
@@ -70,11 +78,12 @@ export const deleteCoursebyId = async (req, res) => {
     let { id } = req.params
     const course = await Course.findById(id);
     const imageUrl = course.imageUrl;
-    const filename = imageUrl.split('/').pop();
-    const imagePath = path.join(__dirname, '../uploads', filename);
-    console.log(imagePath);
-    const cleanFilePath = imagePath.slice(1);
-    fs.unlinkSync(cleanFilePath);
+    const publicId = imageUrl
+      .split("/")
+      .splice(-2)
+      .join("/")
+      .split(".")[0];
+    await cloudinary.uploader.destroy(publicId);
     await Course.findByIdAndDelete(id)
     res.status(200).send({ message: 'Deleted successfully' })
 
@@ -86,14 +95,45 @@ export const deleteCoursebyId = async (req, res) => {
 
 export const editCoursebyId = async (req, res) => {
   try {
+    const { id } = req.params;
     const new_data = req.body;
-    const { id } = req.params
-    // console.log(new_data,id)
-    await Course.findByIdAndUpdate(id, new_data)
-    res.status(200).send({ status: true, message: 'Updated successfully' })
+
+    // Find the existing course
+    const existingCourse = await Course.findById(id);
+    if (!existingCourse) {
+      return res.status(404).json({ status: false, message: 'Course not found' });
+    }
+
+    // If there's a new file uploaded
+    if (req.file) {
+      // Delete the old image from Cloudinary
+      if (existingCourse.imageUrl) {
+        const publicId = existingCourse.imageUrl.split("/").splice(-2).join("/").split(".")[0];
+        await cloudinary.uploader.destroy(publicId);
+      }
+
+      // Upload the new image
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "course",
+        tags: "course",
+        resource_type: "auto"
+      });
+
+      // Add the new image URL to the data to be updated
+      new_data.imageUrl = result.secure_url;
+    }
+
+    // Update the course
+    const updatedCourse = await Course.findByIdAndUpdate(id, new_data, { new: true });
+
+    res.status(200).json({ 
+      status: true, 
+      message: 'Updated successfully', 
+      course: updatedCourse 
+    });
 
   } catch (error) {
-    console.log(error);
-    res.status(400).send({ error: error })
+    console.error("Error in editCoursebyId:", error);
+    res.status(500).json({ status: false, error: "Internal Server Error" });
   }
-}
+};
