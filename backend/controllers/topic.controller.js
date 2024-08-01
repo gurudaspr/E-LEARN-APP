@@ -54,12 +54,13 @@ export const addSubTopic = async (req, res) => {
 
 export const viewTopic = async (req, res) => {
     const {courseId } = req.body;
+
     try {
         const topic = await Topic.findOne({ courseId}).populate('subTopics');
         res.status(200).json(topic);
     }
     catch (error) {
-        console.error('Error fetching topic:', error);
+        console.error('Error while fetching topic:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 }
