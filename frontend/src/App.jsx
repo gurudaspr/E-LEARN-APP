@@ -12,6 +12,7 @@ import Resetpassword from "./pages/Resetpassword";
 import CourseDetails from "./components/user/CourseDetails";
 import EnrolledCoursePage from "./pages/EnrolledCoursePage";
 import CoursePage from "./pages/CoursePage";
+import CourseDetailView from "./components/user/CourseDetailsView";
 
 export default function App() {
   const { isAuth, checkAuth } = useAuthStore();
@@ -33,6 +34,7 @@ export default function App() {
             <Route path="/edit-course/:id" element={<AddCourse />} />
             <Route path="/my-courses" element={<EnrolledCoursePage />} />
             <Route path="/course-details/:id" element={<CourseDetails />} />
+            <Route path="/course-view/:id" element={<CourseDetailView />} />
            
           </>
         ) : (

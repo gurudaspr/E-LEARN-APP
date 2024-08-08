@@ -54,7 +54,7 @@ export default function EnrolledCourse() {
                                     <div className='flex justify-between'>
                                     <p>{enroll.courseId.description}</p>
                                     <div className="card-actions justify-end">
-                                        <Link to={`/course-details/${enroll.courseId._id}`}><button className="btn bg-blue-600 text-white rounded border-none hover:bg-blue-500">View</button></Link>
+                                        <Link to={`/course-view/${enroll.courseId._id}`}><button className="btn bg-blue-600 text-white rounded border-none hover:bg-blue-500">View</button></Link>
                                     </div>
                                     </div>
                                 </div>

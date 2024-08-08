@@ -8,8 +8,9 @@ import upload from '../middlewares/upload.middleware.js';
  const router = express.Router();
  
  router.post('/add', addTopic);
- router.get('/view' ,viewTopic);
+ 
  router.post('/subtopic/add', upload.single('video'), addSubTopic);
+ router.get('/view/:id', viewTopic);
  
  export default router;
 
