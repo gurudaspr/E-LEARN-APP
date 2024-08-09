@@ -26,7 +26,7 @@ export default function CourseDetail() {
         // Automatically set the first video as the selected video if available
         if (topics.length > 0 && topics[0].subTopics.length > 0) {
           setSelectedVideoUrl(topics[0].subTopics[0].videoUrl);
-          setIsPlaying(true);
+          setIsPlaying(false);
         }
       } catch (err) {
         setError("Failed to fetch course and topics details");
@@ -63,6 +63,8 @@ export default function CourseDetail() {
                       width="100%"
                       height="500px"
                       playing={isPlaying} // Control video playback based on state
+                      
+
                       config={{
                         vimeo: {
                           playerVars: {

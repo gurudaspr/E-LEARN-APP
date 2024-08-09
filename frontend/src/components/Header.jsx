@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FaBarsStaggered, FaX, FaBookOpen } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
-import { FaPlus } from 'react-icons/fa';
 
 const Header = () => {
     let Links = [
@@ -30,10 +29,10 @@ const Header = () => {
         <div className='shadow-md w-full sticky  top-0  left-0 z-10'>
             <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
                
-                <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
+                <Link to='/' className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
                     <FaBookOpen className='w-7 h-7 text-blue-600' />
                     <span>E-Learn</span>
-                </div>
+                </Link>
                 
                 <div onClick={() => setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
                     {

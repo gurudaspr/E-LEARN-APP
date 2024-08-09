@@ -59,7 +59,7 @@ export default function CoursePage() {
   };
 
   return (
-    <div className="h-min-screen bg-slate-200 py-10">
+    <div className="h-min-screen bg-slate-200 py-10 min-h-screen">
       <h1 className='text-center text-4xl font-mono md:text-7xl pb-10'>Our Courses</h1>
       <div className="container mx-auto">
         {loading ? (

@@ -13,6 +13,7 @@ import CourseDetails from "./components/user/CourseDetails";
 import EnrolledCoursePage from "./pages/EnrolledCoursePage";
 import CoursePage from "./pages/CoursePage";
 import CourseDetailView from "./components/user/CourseDetailsView";
+import Footer from "./components/Footer";
 
 export default function App() {
   const { isAuth, checkAuth } = useAuthStore();
@@ -45,11 +46,13 @@ export default function App() {
             <Route path="/my-courses" element={<Navigate replace to="/login" />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/reset-password" element={<Resetpassword />} />
-            {/* <Route path="/add-course" element={<AddCourse />} /> */}
-            
+            <Route path="/course-details/:id" element={<Navigate replace to="/login" />} />
+            <Route path="/course-view/:id" element={<Navigate replace to="/login" />} />     
           </>
         )}
       </Routes>
+      <Footer/>
+
       <ToastContainer autoClose={1000}  position="bottom-center" />
       </div>
     </>

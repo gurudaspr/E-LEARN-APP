@@ -137,7 +137,8 @@ export default function CourseDetail() {
   if (error) return <p className="text-center p-4 text-red-500">{error}</p>;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="bg-slate-200 min-h-screen">
+    <div className="container  mx-auto p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left side: Course Details */}
         <div className="space-y-4">
@@ -213,7 +214,7 @@ export default function CourseDetail() {
 
       {/* Modal for Adding Subtopic */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-20">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h2 className="text-lg font-bold mb-4">Add New Subtopic</h2>
             <input
@@ -248,6 +249,7 @@ export default function CourseDetail() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
