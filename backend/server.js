@@ -35,7 +35,7 @@ app.use(
       credentials: true,
     }
   ));
-
+connectToMongoDB()
 app.use('/auth', authRoutes);
 app.use('/course', courseRoutes);
 app.use('/enroll', enrollRoutes);
@@ -44,7 +44,7 @@ app.use('/topic', topicRoutes);
 app.use('/',(req,res)=>{
     res.send('server running')
 })
-connectToMongoDB()
+
 app.listen(PORT,()=>{
     console.log('Server is running at http://localhost:' + PORT);
 })
