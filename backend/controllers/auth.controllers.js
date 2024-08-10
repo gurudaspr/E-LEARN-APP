@@ -77,7 +77,6 @@ export const sendOtp = async (req, res) => {
 
             await Otp.create({ email, otp });
         }
-        console.log('OTP:', otp);
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
