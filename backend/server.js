@@ -11,12 +11,31 @@ import topicRoutes from './routes/topic.routes.js';
 dotenv.config();
 const PORT = process.env.PORT || 7895;
 const app = express();
-
-app.use(cors({
-    origin: 'https://e-learn-app-fe.vercel.app/'
-}));
-
 app.use(express.json());
+
+// app.use(cors({
+//     origin: 'https://e-learn-app-fe.vercel.app/'
+// }));
+app.use(
+    cors({
+      origin: "https://e-learn-app-fe.vercel.app",
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      credentials: true,
+      allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Requested-With",
+        "Accept",
+        "Origin",
+      ],
+    })
+  );
+  app.options("*", cors(
+    {
+      origin: true,
+      credentials: true,
+    }
+  ));
 
 app.use('/auth', authRoutes);
 app.use('/course', courseRoutes);
