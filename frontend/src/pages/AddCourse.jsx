@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { baseUrl } from '../config/baseUrl';
 
 export default function AddCourse() {
   const [loading, setLoading] = useState(false);
@@ -16,7 +17,7 @@ export default function AddCourse() {
 
     try {
       const token = localStorage.getItem("token");
-      let res = await axios.get(`http://localhost:5000/course/view-course/${id}`,{
+      let res = await axios.get(`${baseUrl}/course/view-course/${id}`,{
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -50,14 +51,14 @@ export default function AddCourse() {
 
       let res;
       if (isEdit) {
-        res = await axios.put(`http://localhost:5000/course/edit/${id}`, formData, {
+        res = await axios.put(`${baseUrl}/course/edit/${id}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
       } else {
-        res = await axios.post(`http://localhost:5000/course/add-course`, formData, {
+        res = await axios.post(`${baseUrl}/course/add-course`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { baseUrl } from "../config/baseUrl";
 
 const useSignup = () => {
     const [loading, setLoading] = useState(false);
@@ -42,7 +43,7 @@ const useSignup = () => {
     }; 
     const checkEmailExists = async (email) => {
       try {
-        const response = await axios.post(`http://localhost:5000/auth/check-email`, { email });
+        const response = await axios.post(`${baseUrl}/auth/check-email`, { email });
         return response.data.exists; // Assume backend returns { exists: true/false }
       } catch (error) {
         console.error(error);
@@ -52,7 +53,7 @@ const useSignup = () => {
 
  const sendOtp = async (email) => {
     try {
-      const response = await axios.post(`http://localhost:5000/auth/send-otp`, { email });
+      const response = await axios.post(`${baseUrl}/auth/send-otp`, { email });
       if (response.status === 200) {
         setOtpSent(true); // OTP sent successfully, update state
         setEmail(email); // Save user's email for OTP verification
@@ -66,7 +67,7 @@ const useSignup = () => {
   const verifyOtp = async ( otp) => {
     setLoading(true);
     try {
-      const response = await axios.post(`http://localhost:5000/auth/verify-otp`, {otp ,userData });
+      const response = await axios.post(`${baseUrl}/auth/verify-otp`, {otp ,userData });
       if (response.status === 201) {
         toast.success("Signup success");
         navigate("/login");

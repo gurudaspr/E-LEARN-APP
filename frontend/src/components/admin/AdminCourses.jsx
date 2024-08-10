@@ -1,8 +1,7 @@
 import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+
 
 export default function AdminCourses({ courses, fetchData, setDeleteCourseId }) {
   const navigate = useNavigate();

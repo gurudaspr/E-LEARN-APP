@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../config/baseUrl";
+
 
 const useReset = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ const useReset = () => {
         setLoading(false);
         return;
       }
-      const response = await axios.post('http://localhost:5000/auth/reset-password-otp', data);
+      const response = await axios.post(`${baseUrl}/auth/reset-password-otp`, data);
       setEmail(data.email);
       toast.success(response.data.message);
     } catch (error) {
@@ -33,7 +35,7 @@ const useReset = () => {
   const verifyResetPasswordOtp = async (data) => {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/auth/reset-otp-verify', data);
+      const response = await axios.post(`${baseUrl}/auth/reset-otp-verify`, data);
       toast.success(response.data.message);
       console.log(response.data.message);
       setOtpVerified(true);
@@ -49,7 +51,7 @@ const useReset = () => {
     setLoading(true);
     console.log(data);
     try {
-      const response = await axios.post('http://localhost:5000/auth/reset-password', data);
+      const response = await axios.post(`${baseUrl}/auth/reset-password`, data);
       toast.success(response.data.message);
       navigate('/login')
     } catch (error) {
@@ -62,7 +64,7 @@ const useReset = () => {
 
   const checkEmailExists = async (email) => {
     try {
-      const response = await axios.post(`http://localhost:5000/auth/check-email`, { email });
+      const response = await axios.post(`${baseUrl}/auth/check-email`, { email });
       return response.data.exists; // Assume backend returns { exists: true/false }
     } catch (error) {
       console.error(error);

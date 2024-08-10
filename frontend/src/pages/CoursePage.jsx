@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import Modal from '../components/Model.jsx';
 import AdminCourses from '../components/admin/AdminCourses.jsx';
 import UserCourses from '../components/user/UserCourses.jsx';
+import { baseUrl } from '../config/baseUrl.js';
 
 export default function CoursePage() {
   const { userRole, userId } = useAuthStore();
@@ -23,7 +24,7 @@ export default function CoursePage() {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/course/view-course/', {
+      const response = await axios.get('${baseUrl}/course/view-course/', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -39,7 +40,7 @@ export default function CoursePage() {
   const confirmDelete = async () => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/course/view-course/${deleteCourseId}`, {
+      await axios.delete(`${baseUrl}/course/view-course/${deleteCourseId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
