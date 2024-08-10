@@ -2,6 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { baseUrl } from '../../config/baseUrl';
+import { Navigate } from 'react-router-dom';
 
 
 export default function UserCourses({ courses, userId , isAuth }) {
