@@ -7,7 +7,7 @@ import courseRoutes from './routes/course.routes.js';
 import enrollRoutes from './routes/enroll.routes.js';
 import topicRoutes from './routes/topic.routes.js';
 
-connectToMongoDB()
+
 dotenv.config();
 const PORT = process.env.PORT || 7895;
 const app = express();
@@ -26,6 +26,7 @@ app.use('/topic', topicRoutes);
 app.use('/',(req,res)=>{
     res.send('server running')
 })
+connectToMongoDB()
 app.listen(PORT,()=>{
     console.log('Server is running at http://localhost:' + PORT);
 })
