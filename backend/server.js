@@ -7,12 +7,13 @@ import courseRoutes from './routes/course.routes.js';
 import enrollRoutes from './routes/enroll.routes.js';
 import topicRoutes from './routes/topic.routes.js';
 
+connectToMongoDB()
 dotenv.config();
 const PORT = process.env.PORT || 7895;
 const app = express();
 
 app.use(cors({
-    
+    origin: 'https://e-learn-app-fe.vercel.app/'
 }));
 
 app.use(express.json());
@@ -26,6 +27,5 @@ app.use('/',(req,res)=>{
     res.send('server running')
 })
 app.listen(PORT,()=>{
-    connectToMongoDB()
     console.log('Server is running at http://localhost:' + PORT);
 })
