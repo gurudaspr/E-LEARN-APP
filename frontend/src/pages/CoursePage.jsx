@@ -6,8 +6,10 @@ import Modal from '../components/Model.jsx';
 import AdminCourses from '../components/admin/AdminCourses.jsx';
 import UserCourses from '../components/user/UserCourses.jsx';
 import { baseUrl } from '../config/baseUrl.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function CoursePage() {
+  const navigate = useNavigate();
   const { userRole, userId , isAuth } = useAuthStore();
   const isAdmin = userRole === 'admin';
 
@@ -73,7 +75,7 @@ export default function CoursePage() {
           isAdmin ? (
             <AdminCourses courses={courses} fetchData={fetchData} setDeleteCourseId={setDeleteCourseId} />
           ) : (
-            <UserCourses courses={courses} userId={userId} isAuth={isAuth} />
+            <UserCourses courses={courses} userId={userId} isAuth={isAuth} navigate={navigate} />
           )
         )}
       </div>

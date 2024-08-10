@@ -14,7 +14,6 @@ const app = express();
 app.use(express.json());
 
 // app.use(cors({
-//     origin: 'https://e-learn-app-fe.vercel.app/'
 // }));
 app.use(
     cors({

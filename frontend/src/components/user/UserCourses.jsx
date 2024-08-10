@@ -5,13 +5,15 @@ import { baseUrl } from '../../config/baseUrl';
 import { Navigate } from 'react-router-dom';
 
 
-export default function UserCourses({ courses, userId , isAuth }) {
+export default function UserCourses({ courses, userId , isAuth,navigate }) {
 
   
   const enrollCourse = async (courseId) => {
     if(!isAuth){
-      return <Navigate replace to="/login" />
+      navigate('/login');
+      return;
     }
+   
     const token = localStorage.getItem('token');
     try {
       await axios.post(`${baseUrl}/enroll/enroll-course`, {

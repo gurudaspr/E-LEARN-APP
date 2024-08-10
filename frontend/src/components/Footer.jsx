@@ -16,7 +16,7 @@ const Footer = () => {
                     <span className="text-gray-600">
                         © {currentYear} All rights reserved.
                     </span>
-                    <span className="text-gray-600 font-semibold">
+                    <span className="text-gray-600 font-semibold hidden md:block ">
                         Designed by gurudaspr
                     </span>
                 </div>
