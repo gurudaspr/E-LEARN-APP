@@ -8,7 +8,7 @@ import UserCourses from '../components/user/UserCourses.jsx';
 import { baseUrl } from '../config/baseUrl.js';
 
 export default function CoursePage() {
-  const { userRole, userId } = useAuthStore();
+  const { userRole, userId , isAuth } = useAuthStore();
   const isAdmin = userRole === 'admin';
 
   const [loading, setLoading] = useState(true);
@@ -73,7 +73,7 @@ export default function CoursePage() {
           isAdmin ? (
             <AdminCourses courses={courses} fetchData={fetchData} setDeleteCourseId={setDeleteCourseId} />
           ) : (
-            <UserCourses courses={courses} userId={userId} />
+            <UserCourses courses={courses} userId={userId} isAuth={isAuth} />
           )
         )}
       </div>

@@ -3,7 +3,12 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { baseUrl } from '../../config/baseUrl';
 
-export default function UserCourses({ courses, userId }) {
+
+export default function UserCourses({ courses, userId , isAuth }) {
+
+  if(!isAuth){
+    return <Navigate replace to="/login" />
+  }
   const enrollCourse = async (courseId) => {
     const token = localStorage.getItem('token');
     try {
