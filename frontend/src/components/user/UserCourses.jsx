@@ -7,10 +7,11 @@ import { Navigate } from 'react-router-dom';
 
 export default function UserCourses({ courses, userId , isAuth }) {
 
-  if(!isAuth){
-    return <Navigate replace to="/login" />
-  }
+  
   const enrollCourse = async (courseId) => {
+    if(!isAuth){
+      return <Navigate replace to="/login" />
+    }
     const token = localStorage.getItem('token');
     try {
       await axios.post(`${baseUrl}/enroll/enroll-course`, {
