@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import "daisyui/dist/full.css";
+import { baseUrl } from "../../config/baseUrl";
 
 export default function CourseDetail() {
   const { id } = useParams();
@@ -18,7 +19,7 @@ export default function CourseDetail() {
   useEffect(() => {
     const fetchCourseAndTopics = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/topic/view/${id}`);
+        const response = await axios.get(`${baseUrl}/topic/view/${id}`);
         const { topics, course } = response.data;
         setCourse(course);
         setTopics(topics || []);

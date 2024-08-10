@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useAuthStore from '../../store/authStore';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../../config/baseUrl';
 
 export default function EnrolledCourse() {
     const { userId } = useAuthStore();
@@ -19,7 +20,7 @@ export default function EnrolledCourse() {
     const fetchEnrolledCourses = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post(`http://localhost:5000/enroll/view-enroll-course`, { userId },{
+            const response = await axios.post(`${baseUrl}/enroll/view-enroll-course`, { userId },{
                 headers: {
                   Authorization: `Bearer ${token}`
                 }

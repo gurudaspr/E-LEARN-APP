@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { FaPlus } from "react-icons/fa";
 import axios from "axios";
 import "daisyui/dist/full.css";
+import { baseUrl } from "../../config/baseUrl";
 
 export default function CourseDetail() {
   const { id } = useParams();
@@ -23,7 +24,7 @@ export default function CourseDetail() {
   useEffect(() => {
     const fetchCourseAndTopics = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/topic/view/${id}`);
+        const response = await axios.get(`${baseUrl}/topic/view/${id}`);
         const { topics, course } = response.data;
         setCourse(course);
         setTopics(topics || []);
@@ -49,7 +50,7 @@ export default function CourseDetail() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/topic/add", {
+      const response = await axios.post(`${baseUrl}/topic/add`, {
         title: newTopicName,
         course: course._id,
       });
@@ -94,7 +95,7 @@ export default function CourseDetail() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/topic/subtopic/add",
+        `${baseUrl}/topic/subtopic/add`,
         formData,
         {
           headers: {

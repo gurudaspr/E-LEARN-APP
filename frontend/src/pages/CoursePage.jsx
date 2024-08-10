@@ -24,7 +24,7 @@ export default function CoursePage() {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('${baseUrl}/course/view-course/', {
+      const response = await axios.get(`${baseUrl}/course/view-course/`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

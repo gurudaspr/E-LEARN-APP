@@ -1,12 +1,13 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { baseUrl } from '../../config/baseUrl';
 
 export default function UserCourses({ courses, userId }) {
   const enrollCourse = async (courseId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.post(`http://localhost:5000/enroll/enroll-course`, {
+      await axios.post(`${baseUrl}/enroll/enroll-course`, {
         userId: userId,
         courseId: courseId
       }, {
