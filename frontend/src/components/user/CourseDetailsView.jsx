@@ -42,10 +42,6 @@ export default function CourseDetail() {
     setSelectedVideoUrl(videoUrl);
     setIsPlaying(true); // Start playing the video
   };
-
-  if (loading) return <p className="text-center p-4">Loading...</p>;
-  if (error) return <p className="text-center p-4 text-red-500">{error}</p>;
-
   return (
     <div className=" min-h-screen h-full bg-slate-200 py-10">
       <div className="container mx-auto p-4">
