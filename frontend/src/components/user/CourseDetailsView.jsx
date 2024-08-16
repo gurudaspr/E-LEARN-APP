@@ -47,7 +47,7 @@ export default function CourseDetail() {
   if (error) return <p className="text-center p-4 text-red-500">{error}</p>;
 
   return (
-    <div className="h-full md:h-screen bg-slate-200 py-10">
+    <div className=" min-h-screen h-full bg-slate-200 py-10">
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left side: Course Details */}
@@ -62,18 +62,17 @@ export default function CourseDetail() {
                       url={selectedVideoUrl}
                       controls
                       width="100%"
-                      height="500px"
-                      playing={isPlaying} // Control video playback based on state
-                      
-
+                      height="100%"
+                      playing={isPlaying}
+                      className="border-2 border-gray-900 bg-black rounded-lg shadow-md 
+                        xs:h-[calc(100vw*9/16)] md:h-[600px]"
                       config={{
                         vimeo: {
                           playerVars: {
-                            autoplay: 0, // Start video manually
+                            autoplay: 0,
                           },
                         },
                       }}
-                      className="border-2 border-gray-900 bg-black rounded-lg shadow-md"
                     />
                   </div>
                 )}
