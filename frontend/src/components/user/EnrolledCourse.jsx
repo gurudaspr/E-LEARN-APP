@@ -36,7 +36,7 @@ export default function EnrolledCourse() {
     };
     return (
 
-        <div className="h-full md:h-screen bg-slate-200 py-10">
+        <div className="h-min-screen h-full bg-slate-200 py-10">
             <h1 className='text-center text-4xl font-mono md:text-7xl pb-10'>My Courses</h1>
             <div className="container mx-auto">
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-6 gap-y-20'>
