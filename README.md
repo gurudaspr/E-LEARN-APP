@@ -49,7 +49,7 @@ E-Learn is a comprehensive e-learning platform built with modern web technologie
    npm install
    ```
 4. Set up environment variables:
-   Create a .env file in the root directory and add the following:
+   Create a .env file in the backend directory and add the following variables:
    ```bash
    PORT=5000
    MONGODB_URI=your_mongodb_connection_string
