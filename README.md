@@ -70,17 +70,20 @@ E-Learn is a comprehensive e-learning platform built with modern web technologie
    ```
 ## Features
 
-1. **Sign Up / Log In**: Create a new account or log in to an existing one using secure OTP verification.
-   ![User Authentication](https://github.com/yourusername/E-Learn/blob/main/images/login.png)
+1. **Send Otp**: Send a one-time password (OTP) to your registered email address for resetting your password.
+   ![User Authentication](https://github.com/gurudaspr/E-LEARN-APP/blob/main/images/otp.png)
 
-2. **Browse Courses**: Explore a wide range of available courses and enroll with ease.
-   ![Course List](https://github.com/yourusername/E-Learn/blob/main/images/courses.png)
+2. **Reset Password**: Reset your password with a secure and easy-to-use password reset process.
+   ![Reset Password](https://github.com/gurudaspr/E-LEARN-APP/blob/main/images/resetpswd.png)
 
-3. **Watch Lessons**: Access high-quality video lessons for enrolled courses, with a smooth and intuitive player interface.
-   ![Video Lesson](https://github.com/yourusername/E-Learn/blob/main/images/lesson.png)
+3. **Browse Courses**: Explore a wide range of available courses and enroll with ease.
+   ![Course List](https://github.com/gurudaspr/E-LEARN-APP/blob/main/images/course.png)
 
-4. **My Courses**: View all enrolled courses, track your progress, and easily resume where you left off.
-   ![My Courses](https://github.com/yourusername/E-Learn/blob/main/images/my-courses.png)
+4. **Watch Lessons**: Access high-quality video lessons for enrolled courses, with a smooth and intuitive player interface.
+   ![Video Lesson](https://github.com/gurudaspr/E-LEARN-APP/blob/main/images/videolesson.png)
+
+5. **My Courses**: View all enrolled courses, track your progress, and easily resume where you left off.
+   ![My Courses](https://github.com/gurudaspr/E-LEARN-APP/blob/main/images/mycourse.png)
 
 
 
